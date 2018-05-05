@@ -18,7 +18,7 @@ class MenuScene: SKScene {
     weak var menuDelegate: MenuSceneDelegate?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       
+        
         for t in touches {
             let positionInScene = t.location(in: self)
             let touchedNode = self.atPoint(positionInScene)
@@ -36,6 +36,33 @@ class MenuScene: SKScene {
         }
     }
     
+    let slider = UISlider(frame: CGRect(x: 10, y: 250, width: 280, height: 20))
+    let slider2 = UISlider(frame: CGRect(x: 10, y: 150, width: 280, height: 20))
+    
     override func didMove(to view: SKView) {
+        loadSlider()
     }
+    
+    private func loadSlider() {
+//        slider.addTarget(self, action:  "sliderValueDidChange", for: .valueChanged)
+        
+        slider.addTarget(self, action: #selector(MenuScene.slider1ValueDidChange(_:)), for: .valueChanged)
+        
+//        slider2.addTarget(self, action: "sliderValueDidChange", for: .valueChanged)
+        slider2.addTarget(self, action: #selector(MenuScene.slider2ValueDidChange(_:)), for: .valueChanged)
+        view?.addSubview(slider)
+        view?.addSubview(slider2)
+    }
+    
+    @objc func slider1ValueDidChange(_ sender:UISlider!)
+    {
+        print("\(sender.value)")
+    }
+    
+    @objc func slider2ValueDidChange(_ sender:UISlider!)
+    {
+        print("\(sender.value)")
+    }
+    
+    
 }
