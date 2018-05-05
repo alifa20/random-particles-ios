@@ -20,9 +20,6 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     var lastUpdateTime: TimeInterval = 0
     var shipSpeed: CGFloat = 10.0
     
-    var countdownTimer: Timer!
-    var totalTime = 60
-    
     var maxNumberOfBubbles = 15
     //random logic
     var delay: TimeInterval = 0.5
@@ -41,32 +38,6 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         ship = childNode(withName: "ship") as! SKSpriteNode
         shipSpeed = size.width/2.0
         asteroidSpawner(delay: 0.5)
-    }
-    
-    func startTimer() {
-        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateTime() {
-        let timerLabel = childNode(withName: "timerLabel") as! UILabel
-        timerLabel.text = "\(timeFormatted(totalTime))"
-        
-        if totalTime != 0 {
-            totalTime -= 1
-        } else {
-            endTimer()
-        }
-    }
-    
-    func endTimer() {
-        countdownTimer.invalidate()
-    }
-    
-    func timeFormatted(_ totalSeconds: Int) -> String {
-        let seconds: Int = totalSeconds % 60
-        let minutes: Int = (totalSeconds / 60) % 60
-        //     let hours: Int = totalSeconds / 3600
-        return String(format: "%02d:%02d", minutes, seconds)
     }
     
     func asteroidSpawner(delay: TimeInterval){
