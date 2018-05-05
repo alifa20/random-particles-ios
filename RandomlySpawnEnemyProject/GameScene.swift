@@ -16,10 +16,11 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     var shootButton: SVLSpriteNodeButton!
     
     var ship: SKSpriteNode!
-
+    
     var lastUpdateTime: TimeInterval = 0
     var shipSpeed: CGFloat = 10.0
     
+    var timeFrame = 60;
     //random logic
     var delay: TimeInterval = 0.5
     var timeSinceStart: TimeInterval = 0.0
@@ -55,10 +56,21 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         run(repeatAction, withKey: "spawnAsteroids")
     }
     
+        func checkValidLocation(_ newBubble: SKSpriteNode) -> Bool {
+            for subview in (self.view?.subviews)! {
+                if let existingBubble = subview as? SKSpriteNode {
+                    if existingBubble.frame.intersects(newBubble.frame) {
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+    
     func spawnAsteroid(){
         
         //size
-        var asteroidSize = CGSize(width: 50, height: 50)
+        var asteroidSize = CGSize(width: 100, height: 70)
         
         let randomSize = arc4random() % 3
         
@@ -76,13 +88,38 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         //position
         let y = size.height/2+asteroidSize.height/2
         
-        var randomX = CGFloat(arc4random() % UInt32(size.width-asteroidSize.width))
-        randomX -= size.width/2-asteroidSize.width/2
+        //        var randomX = CGFloat(arc4random() % UInt32(size.width-asteroidSize.width))
+        //        randomX -= size.width/2-asteroidSize.width/2
+        let cSpots = [-1*(size.width/2-asteroidSize.width/2)
+            ,-1*(size.width/4-asteroidSize.width/2)
+            ,0
+            ,size.width/4-asteroidSize.width/2
+            ,size.width/2-asteroidSize.width/2]
+        let randomX = cSpots[Int(arc4random() % 5)]
+        
+        
+        //        var randomX = size.width/2-asteroidSize.width/2
+        //        let colors = [UIColor.black, UIColor.blue, UIColor.blue, UIColor.green, UIColor.green, UIColor.green, UIColor.purple, UIColor.purple, UIColor.purple, UIColor.purple, UIColor.purple, UIColor.purple, UIColor.red, UIColor.red, UIColor.red, UIColor.red, UIColor.red, UIColor.red, UIColor.red, UIColor.red];
+        //        let randomIndex = Int(arc4random_uniform(UInt32(colors.count)))
+        //        let color = colors[randomIndex]
+        
+        let colors = ["black", "blue", "blue", "green", "green", "green", "purple", "purple", "purple", "purple", "purple", "purple", "red", "red", "red", "red", "red", "red", "red", "red"];
+        let randomIndex = Int(arc4random_uniform(UInt32(colors.count)))
+        let color = colors[randomIndex]
         
         //init
-        let asteroid = SKSpriteNode(color: SKColor.brown, size: asteroidSize)
+        let asteroid = TouchableSKSpriteNode(imageNamed: color)
+        asteroid.size = CGSize(width: 100.0,height: 100.0)
+        //        let asteroid = TouchableSKSpriteNode(color: SKColor.brown, size: asteroidSize)
+        asteroid.isUserInteractionEnabled = true
         asteroid.position = CGPoint(x: randomX, y: y)
-        addChild(asteroid)
+        if checkValidLocation(asteroid) {
+            print("valid")
+            addChild(asteroid)
+        } else {
+            print("not valid")
+        }
+        //        addChild(asteroid)
         
         //move
         let moveDownAction = SKAction.moveBy(x: 0, y: -size.height-asteroid.size.height, duration: 20.0)
@@ -90,21 +127,21 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         let sequenceAction = SKAction.sequence([moveDownAction, destroyAction])
         asteroid.run(sequenceAction)
         
-        //rotation
-        var rotateAction = SKAction.rotate(byAngle: 1, duration: 1)
+        //        //rotation
+        //        var rotateAction = SKAction.rotate(byAngle: 1, duration: 1)
+        //
+        //        let randomRotation = arc4random() % 2
+        //
+        //        if randomRotation == 1  {
+        //            rotateAction = SKAction.rotate(byAngle: -1, duration: 1)
+        //        }
         
-        let randomRotation = arc4random() % 2
-        
-        if randomRotation == 1  {
-            rotateAction = SKAction.rotate(byAngle: -1, duration: 1)
-        }
-        
-        let repeatForeverAction = SKAction.repeatForever(rotateAction)
-        asteroid.run(repeatForeverAction)
+        //        let repeatForeverAction = SKAction.repeatForever(rotateAction)
+        //        asteroid.run(repeatForeverAction)
     }
     
     override func update(_ currentTime: TimeInterval) {
-
+        
         if lastUpdateTime == 0 {
             lastUpdateTime = currentTime
             return
@@ -130,7 +167,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         
         //difficulty
         timeSinceStart += dt
-
+        
         if timeSinceStart > 5 && delay > 0.4 {
             asteroidSpawner(delay: 0.4)
         } else if timeSinceStart > 10 && delay > 0.3 {
