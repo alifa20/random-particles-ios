@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     var countdownTimer: Timer!
-    var totalTime = 60
+    var totalTime = 4
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: "MenuScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
@@ -66,6 +66,7 @@ class GameViewController: UIViewController {
                 view.presentScene(scene)
             }
         }
+        timerLabel.removeFromSuperview()
     }
     
     func timeFormatted(_ totalSeconds: Int) -> String {
@@ -79,12 +80,9 @@ class GameViewController: UIViewController {
         return true
     }
     
-    
-    
-    
-     func willMoveFromView(view: SKView) {
-        timerLabel.removeFromSuperview()
-    }
+//     func willMoveFromView(view: SKView) {
+//        timerLabel.removeFromSuperview()
+//    }
     
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

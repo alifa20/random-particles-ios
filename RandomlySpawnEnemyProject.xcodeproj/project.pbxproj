@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2717850D209DACEF00E69F6B /* FinishScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2717850C209DACEF00E69F6B /* FinishScene.sks */; };
 		27178511209DB45E00E69F6B /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 27178510209DB45E00E69F6B /* MenuScene.sks */; };
+		27178513209DC01400E69F6B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27178512209DC01400E69F6B /* MenuScene.swift */; };
 		27D97F09209D76B20051EB16 /* TouchableSKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D97F08209D76B20051EB16 /* TouchableSKSpriteNode.swift */; };
 		B6F0C18A1F7FDF070089C213 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0C1891F7FDF070089C213 /* AppDelegate.swift */; };
 		B6F0C1921F7FDF070089C213 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0C1911F7FDF070089C213 /* GameViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		2717850C209DACEF00E69F6B /* FinishScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FinishScene.sks; sourceTree = "<group>"; };
 		27178510209DB45E00E69F6B /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
+		27178512209DC01400E69F6B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		27D97F08209D76B20051EB16 /* TouchableSKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSKSpriteNode.swift; sourceTree = "<group>"; };
 		B6F0C1861F7FDF070089C213 /* RandomlySpawnEnemyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomlySpawnEnemyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F0C1891F7FDF070089C213 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				27D97F08209D76B20051EB16 /* TouchableSKSpriteNode.swift */,
 				B6F0C1A21F7FDF850089C213 /* SVLSpriteNodeButton.swift */,
 				27178510209DB45E00E69F6B /* MenuScene.sks */,
+				27178512209DC01400E69F6B /* MenuScene.swift */,
 				B6F0C1A11F7FDF210089C213 /* Supporting Files */,
 			);
 			path = RandomlySpawnEnemyProject;
@@ -168,6 +171,7 @@
 				B6F0C1A51F7FDFB50089C213 /* GameScene.swift in Sources */,
 				27D97F09209D76B20051EB16 /* TouchableSKSpriteNode.swift in Sources */,
 				B6F0C1921F7FDF070089C213 /* GameViewController.swift in Sources */,
+				27178513209DC01400E69F6B /* MenuScene.swift in Sources */,
 				B6F0C1A61F7FDFB80089C213 /* SVLSpriteNodeButton.swift in Sources */,
 				B6F0C18A1F7FDF070089C213 /* AppDelegate.swift in Sources */,
 			);
