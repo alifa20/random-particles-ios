@@ -21,6 +21,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     var shipSpeed: CGFloat = 10.0
     
     var timeFrame = 60;
+    var maxNumberOfBubbles = 15
     //random logic
     var delay: TimeInterval = 0.5
     var timeSinceStart: TimeInterval = 0.0
@@ -68,7 +69,9 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         }
     
     func spawnAsteroid(){
-        
+        if(self.children.count > maxNumberOfBubbles) {
+            return
+        }
         //size
         var asteroidSize = CGSize(width: 100, height: 70)
         
