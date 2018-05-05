@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     var countdownTimer: Timer!
-    var totalTime = 4
+    var totalTime = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "MenuScene") {
+            if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 

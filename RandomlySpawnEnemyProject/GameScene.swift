@@ -9,7 +9,13 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
+class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
+ 
+    
+//    func calledFromBubble(_ button: TouchableSKSpriteNode) {
+//        print("calledFromBubble")
+//    }
+//
     
     var leftArrowButton: SVLSpriteNodeButton!
     var rightArrowButton: SVLSpriteNodeButton!
@@ -28,7 +34,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     
     //MARK: - Scene Stuff
     override func didMove(to view: SKView) {
-        
+        print("did move")
         leftArrowButton = childNode(withName: "leftArrowButton") as! SVLSpriteNodeButton
         
         rightArrowButton = childNode(withName: "rightArrowButton") as! SVLSpriteNodeButton
@@ -71,6 +77,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         }
         return true
     }
+ 
     
     func spawnAsteroid(){
         if(self.children.count > maxNumberOfBubbles) {
@@ -120,11 +127,10 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         //        let asteroid = TouchableSKSpriteNode(color: SKColor.brown, size: asteroidSize)
         asteroid.isUserInteractionEnabled = true
         asteroid.position = CGPoint(x: randomX, y: y)
+        asteroid.bubbleType = color
+        asteroid.delegate = self
         if checkValidLocation(asteroid) {
-            print("valid")
             addChild(asteroid)
-        } else {
-            print("not valid")
         }
         //        addChild(asteroid)
         
@@ -208,6 +214,10 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     
     func spriteButtonMoved(_ button: SVLSpriteNodeButton){
         print("spriteButtonMoved")
+    }
+    
+    func calledFromBubble(_ button: TouchableSKSpriteNode) {
+        print("heellllloooo")
     }
     
     func spriteButtonTapped(_ button: SVLSpriteNodeButton){
