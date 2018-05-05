@@ -18,9 +18,22 @@ class MenuScene: SKScene {
     weak var menuDelegate: MenuSceneDelegate?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let gameSceneTemp =  GameScene(fileNamed: "GameScene")
-        gameSceneTemp?.scaleMode = .aspectFill
-        self.scene?.view?.presentScene(gameSceneTemp)
+       
+        for t in touches {
+            let positionInScene = t.location(in: self)
+            let touchedNode = self.atPoint(positionInScene)
+            
+            if let name = touchedNode.name
+            {
+                if name == "startGame"
+                {
+                    print("Touched")
+                    let gameSceneTemp =  GameScene(fileNamed: "GameScene")
+                    gameSceneTemp?.scaleMode = .aspectFill
+                    self.scene?.view?.presentScene(gameSceneTemp)
+                }
+            }
+        }
     }
     
     override func didMove(to view: SKView) {

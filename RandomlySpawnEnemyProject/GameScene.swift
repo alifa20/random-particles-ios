@@ -75,7 +75,6 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
         return true
     }
     
-    
     func spawnAsteroid(){
         if(self.children.count > maxNumberOfBubbles) {
             return
