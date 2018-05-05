@@ -10,12 +10,12 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
- 
     
-//    func calledFromBubble(_ button: TouchableSKSpriteNode) {
-//        print("calledFromBubble")
-//    }
-//
+    
+    //    func calledFromBubble(_ button: TouchableSKSpriteNode) {
+    //        print("calledFromBubble")
+    //    }
+    //
     
     var leftArrowButton: SVLSpriteNodeButton!
     var rightArrowButton: SVLSpriteNodeButton!
@@ -32,6 +32,9 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     var delay: TimeInterval = 0.5
     var timeSinceStart: TimeInterval = 0.0
     
+    var lastColor = ""
+    var score: Double = 0
+    
     //MARK: - Scene Stuff
     override func didMove(to view: SKView) {
         print("did move")
@@ -45,7 +48,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
         ship = childNode(withName: "ship") as! SKSpriteNode
         shipSpeed = size.width/2.0
         asteroidSpawner(delay: 0.5)
-       
+        
         scoreLabel = childNode(withName: "scoreLabel") as! SKLabelNode
         scoreLabel.text="98"
         
@@ -77,7 +80,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
         }
         return true
     }
- 
+    
     
     func spawnAsteroid(){
         if(self.children.count > maxNumberOfBubbles) {
@@ -140,17 +143,17 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
         let sequenceAction = SKAction.sequence([moveDownAction, destroyAction])
         asteroid.run(sequenceAction)
         
-        //        //rotation
-        //        var rotateAction = SKAction.rotate(byAngle: 1, duration: 1)
-        //
-        //        let randomRotation = arc4random() % 2
-        //
-        //        if randomRotation == 1  {
-        //            rotateAction = SKAction.rotate(byAngle: -1, duration: 1)
-        //        }
+        //rotation
+        var rotateAction = SKAction.rotate(byAngle: 1, duration: 1)
         
-        //        let repeatForeverAction = SKAction.repeatForever(rotateAction)
-        //        asteroid.run(repeatForeverAction)
+        let randomRotation = arc4random() % 2
+        
+        if randomRotation == 1  {
+            rotateAction = SKAction.rotate(byAngle: -1, duration: 1)
+        }
+        
+        let repeatForeverAction = SKAction.repeatForever(rotateAction)
+        asteroid.run(repeatForeverAction)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -217,7 +220,29 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     }
     
     func calledFromBubble(_ button: TouchableSKSpriteNode) {
-        print("heellllloooo")
+        var point: Double = 0;
+        if button.bubbleType == "red" {
+            point = 1
+        }
+        if button.bubbleType == "purple" {
+            point = 2
+        }
+        if button.bubbleType == "green" {
+            point = 5
+        }
+        if button.bubbleType == "blue" {
+            point = 8
+        }
+        if button.bubbleType == "black" {
+            point = 10
+        }
+        
+        if lastColor == button.bubbleType {
+            point *= 1.5
+        }
+        lastColor = button.bubbleType
+        score += point;
+        print("\(score)")
     }
     
     func spriteButtonTapped(_ button: SVLSpriteNodeButton){
