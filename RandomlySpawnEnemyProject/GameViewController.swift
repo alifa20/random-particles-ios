@@ -11,12 +11,11 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
-    @IBOutlet weak var Timer: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Timer.text = "time"
+        timerLabel.text = "time"
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
