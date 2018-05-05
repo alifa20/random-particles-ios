@@ -8,8 +8,19 @@
 
 import SpriteKit
 
+protocol SVLSpriteNodeButton2Delegate: class {
+    func calledFromSVLSpriteNodeButton2Delegate(_ button: SVLSpriteNodeButton2)
+
+//    func spriteButtonUp(_ button: SVLSpriteNodeButton)
+//    func spriteButtonMoved(_ button: SVLSpriteNodeButton)
+//    func spriteButtonTapped(_ button: SVLSpriteNodeButton)
+}
+
+
+
 class SVLSpriteNodeButton2: SKSpriteNode {
     
+    weak var delegate: SVLSpriteNodeButton2Delegate?
     func touchDown(atPoint pos : CGPoint){
         print ("Touch Down")
     }
@@ -24,6 +35,7 @@ class SVLSpriteNodeButton2: SKSpriteNode {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("tiouched")
+//        delegate?.calledSVLSpriteNodeButton2Delegate(self)
         for t in touches {self.touchDown(atPoint: t.location(in: self))}
     }
     

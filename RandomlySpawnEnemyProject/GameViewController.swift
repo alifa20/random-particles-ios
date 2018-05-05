@@ -10,7 +10,21 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, MenuSceneDelegate {
+    func calledFromMenuScene(_ scene: MenuScene) {
+        print("calledFromMenuScene")
+    }
+    
+    var startGame: SVLSpriteNodeButton2!
+    
+    //    func calledFromMenuScene(_ button: SVLSpriteNodeButton2) {
+    //        print("calledFromMenuScene")
+    ////        if let scene = SKScene(fileNamed: "GameScene") {
+    ////            // Set the scale mode to scale to fit the window
+    ////            scene.scaleMode = .aspectFill
+    ////        }
+    //    }
+    
     @IBOutlet weak var timerLabel: UILabel!
     
     var countdownTimer: Timer!
@@ -20,12 +34,15 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         timerLabel.text = "time"
         
+//        let menuScene = MenuScene()
+//        menuScene.scaleMode = .aspectFill
+//        menuScene.menuDelegate = self
+    
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "MenuScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                
                 // Present the scene
                 view.presentScene(scene)
             }
@@ -80,9 +97,9 @@ class GameViewController: UIViewController {
         return true
     }
     
-//     func willMoveFromView(view: SKView) {
-//        timerLabel.removeFromSuperview()
-//    }
+    //     func willMoveFromView(view: SKView) {
+    //        timerLabel.removeFromSuperview()
+    //    }
     
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

@@ -8,14 +8,21 @@
 
 import SpriteKit
 
+protocol MenuSceneDelegate: class {
+    func calledFromMenuScene(_ scene: MenuScene)
+}
+
 class MenuScene: SKScene {
     var startGame: SVLSpriteNodeButton2!
+    var viewController: GameViewController!
+    weak var menuDelegate: MenuSceneDelegate?
     
-//    var startGame: SKSpriteNode!
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let gameSceneTemp =  GameScene(fileNamed: "GameScene")
+        gameSceneTemp?.scaleMode = .aspectFill
+        self.scene?.view?.presentScene(gameSceneTemp)
+    }
+    
     override func didMove(to view: SKView) {
-        startGame = childNode(withName: "startGame") as! SVLSpriteNodeButton2
-        startGame.color = .green
-        print("Hey here")
     }
 }
