@@ -9,11 +9,12 @@
 import SpriteKit
 
 class MenuScene: SKScene {
+    var startGame: SVLSpriteNodeButton2!
     
-    var startGame: SKSpriteNode!
+//    var startGame: SKSpriteNode!
 
     override func didMove(to view: SKView) {
-        startGame = childNode(withName: "startGame") as! SKSpriteNode
+        startGame = childNode(withName: "startGame") as! SVLSpriteNodeButton2
         startGame.color = .green
         print("Hey here")
     }

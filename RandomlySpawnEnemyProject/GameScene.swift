@@ -16,7 +16,6 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
 //        print("calledFromBubble")
 //    }
 //
-    
     var leftArrowButton: SVLSpriteNodeButton!
     var rightArrowButton: SVLSpriteNodeButton!
     var shootButton: SVLSpriteNodeButton!
@@ -34,7 +33,6 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     
     //MARK: - Scene Stuff
     override func didMove(to view: SKView) {
-        print("did move")
         leftArrowButton = childNode(withName: "leftArrowButton") as! SVLSpriteNodeButton
         
         rightArrowButton = childNode(withName: "rightArrowButton") as! SVLSpriteNodeButton
