@@ -20,7 +20,9 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     var lastUpdateTime: TimeInterval = 0
     var shipSpeed: CGFloat = 10.0
     
-    var timeFrame = 60;
+    var countdownTimer: Timer!
+    var totalTime = 60
+    
     var maxNumberOfBubbles = 15
     //random logic
     var delay: TimeInterval = 0.5
@@ -41,6 +43,32 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         asteroidSpawner(delay: 0.5)
     }
     
+    func startTimer() {
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTime() {
+        let timerLabel = childNode(withName: "timerLabel") as! UILabel
+        timerLabel.text = "\(timeFormatted(totalTime))"
+        
+        if totalTime != 0 {
+            totalTime -= 1
+        } else {
+            endTimer()
+        }
+    }
+    
+    func endTimer() {
+        countdownTimer.invalidate()
+    }
+    
+    func timeFormatted(_ totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        //     let hours: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
     func asteroidSpawner(delay: TimeInterval){
         removeAction(forKey: "spawnAsteroids")
         
@@ -57,16 +85,16 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         run(repeatAction, withKey: "spawnAsteroids")
     }
     
-        func checkValidLocation(_ newBubble: SKSpriteNode) -> Bool {
-            for subview in (self.view?.subviews)! {
-                if let existingBubble = subview as? SKSpriteNode {
-                    if existingBubble.frame.intersects(newBubble.frame) {
-                        return false
-                    }
+    func checkValidLocation(_ newBubble: SKSpriteNode) -> Bool {
+        for subview in (self.children) {
+            if let existingBubble = subview as? SKSpriteNode {
+                if existingBubble.frame.intersects(newBubble.frame) {
+                    return false
                 }
             }
-            return true
         }
+        return true
+    }
     
     func spawnAsteroid(){
         if(self.children.count > maxNumberOfBubbles) {
