@@ -14,6 +14,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
     var leftArrowButton: SVLSpriteNodeButton!
     var rightArrowButton: SVLSpriteNodeButton!
     var shootButton: SVLSpriteNodeButton!
+    var scoreLabel: SKLabelNode!
     
     var ship: SKSpriteNode!
     
@@ -38,6 +39,10 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate {
         ship = childNode(withName: "ship") as! SKSpriteNode
         shipSpeed = size.width/2.0
         asteroidSpawner(delay: 0.5)
+       
+        scoreLabel = childNode(withName: "scoreLabel") as! SKLabelNode
+        scoreLabel.text="98"
+        
     }
     
     func asteroidSpawner(delay: TimeInterval){

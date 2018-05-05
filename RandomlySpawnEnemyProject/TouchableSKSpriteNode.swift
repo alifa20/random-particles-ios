@@ -9,8 +9,11 @@
 import SpriteKit
 
 class TouchableSKSpriteNode: SKSpriteNode {
-
+    var scoreLabel: SKLabelNode!
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        scoreLabel = self.parent?.childNode(withName: "scoreLabel") as! SKLabelNode
+        scoreLabel.text = String(Int(scoreLabel.text!)!+1)
         self.removeFromParent()
     }
 }
