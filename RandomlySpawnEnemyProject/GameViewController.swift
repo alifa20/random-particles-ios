@@ -12,8 +12,11 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var Timer: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Timer.text = "time"
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
