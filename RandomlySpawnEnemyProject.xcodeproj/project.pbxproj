@@ -11,6 +11,7 @@
 		27178511209DB45E00E69F6B /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 27178510209DB45E00E69F6B /* MenuScene.sks */; };
 		27178513209DC01400E69F6B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27178512209DC01400E69F6B /* MenuScene.swift */; };
 		27D97F09209D76B20051EB16 /* TouchableSKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D97F08209D76B20051EB16 /* TouchableSKSpriteNode.swift */; };
+		41F3C78E209DC4D4009AFF3C /* SVLSpriteNodeButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3C78D209DC4D4009AFF3C /* SVLSpriteNodeButton2.swift */; };
 		B6F0C18A1F7FDF070089C213 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0C1891F7FDF070089C213 /* AppDelegate.swift */; };
 		B6F0C1921F7FDF070089C213 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0C1911F7FDF070089C213 /* GameViewController.swift */; };
 		B6F0C1951F7FDF070089C213 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F0C1931F7FDF070089C213 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		27178510209DB45E00E69F6B /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		27178512209DC01400E69F6B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		27D97F08209D76B20051EB16 /* TouchableSKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSKSpriteNode.swift; sourceTree = "<group>"; };
+		41F3C78D209DC4D4009AFF3C /* SVLSpriteNodeButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVLSpriteNodeButton2.swift; sourceTree = "<group>"; };
 		B6F0C1861F7FDF070089C213 /* RandomlySpawnEnemyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomlySpawnEnemyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F0C1891F7FDF070089C213 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6F0C1911F7FDF070089C213 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				2717850C209DACEF00E69F6B /* FinishScene.sks */,
 				B6F0C1A31F7FDF860089C213 /* GameScene.sks */,
 				B6F0C1A41F7FDF860089C213 /* GameScene.swift */,
+				41F3C78D209DC4D4009AFF3C /* SVLSpriteNodeButton2.swift */,
 				27D97F08209D76B20051EB16 /* TouchableSKSpriteNode.swift */,
 				B6F0C1A21F7FDF850089C213 /* SVLSpriteNodeButton.swift */,
 				27178510209DB45E00E69F6B /* MenuScene.sks */,
@@ -171,6 +174,7 @@
 				B6F0C1A51F7FDFB50089C213 /* GameScene.swift in Sources */,
 				27D97F09209D76B20051EB16 /* TouchableSKSpriteNode.swift in Sources */,
 				B6F0C1921F7FDF070089C213 /* GameViewController.swift in Sources */,
+				41F3C78E209DC4D4009AFF3C /* SVLSpriteNodeButton2.swift in Sources */,
 				27178513209DC01400E69F6B /* MenuScene.swift in Sources */,
 				B6F0C1A61F7FDFB80089C213 /* SVLSpriteNodeButton.swift in Sources */,
 				B6F0C18A1F7FDF070089C213 /* AppDelegate.swift in Sources */,
