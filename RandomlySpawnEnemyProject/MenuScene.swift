@@ -19,6 +19,8 @@ class MenuScene: SKScene {
     var TextInput:UITextField?
     let slider = UISlider(frame: CGRect(x: 10, y: 250, width: 280, height: 20))
     let slider2 = UISlider(frame: CGRect(x: 10, y: 150, width: 280, height: 20))
+    let labelSlider = UILabel (frame: CGRect (x: 10, y: 230, width: 280, height: 20))
+    let labelSlider2 = UILabel (frame: CGRect (x: 10, y: 130, width: 280, height: 20))
     let textField = UITextField(frame: CGRect(x: 10, y: 400, width: 280, height: 20))
     var playerName: String?
     var settings: Settings?
@@ -45,9 +47,11 @@ class MenuScene: SKScene {
                     let transition:SKTransition = SKTransition.fade(withDuration: 1)
                     let gameSceneTemp =  GameScene(fileNamed: "GameScene") as GameScene?
                     gameSceneTemp?.scaleMode = .aspectFill
-                    gameSceneTemp?.settings =  self.settings
+                    gameSceneTemp?.settings =  Settings(maxBubbles:Int(slider2.value), playTime: TimeInterval(slider.value))
+
                     gameSceneTemp?.playerName = self.playerName
                     self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
+                   
                     slider.removeFromSuperview()
                     slider2.removeFromSuperview()
                 }
@@ -71,16 +75,24 @@ class MenuScene: SKScene {
         //        slider2.addTarget(self, action: "sliderValueDidChange", for: .valueChanged)
         slider2.addTarget(self, action: #selector(MenuScene.slider2ValueDidChange(_:)), for: .valueChanged)
         view?.addSubview(slider)
+        view?.addSubview(labelSlider)
         view?.addSubview(slider2)
+        view?.addSubview(labelSlider2)
     }
     
     @objc func slider1ValueDidChange(_ sender:UISlider!)
     {
+        labelSlider.text = String(sender.value)
         print("\(sender.value)")
     }
     
     @objc func slider2ValueDidChange(_ sender:UISlider!)
     {
+        var v = round(sender.value*60)
+        if v < 10 {
+            v = 10
+        }
+        labelSlider2.text = String(v)
         print("\(sender.value)")
     }
     

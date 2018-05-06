@@ -48,8 +48,8 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     
     var countdownTimer: Timer!
     var totalTime = 60
-    var TimeInterval = 20
-    
+    var TimeInterval = 1
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
         //        menuScene.menuDelegate = self
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
+//             Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "FinishScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
@@ -72,7 +72,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
             if let scene = SKScene(fileNamed: "MenuScene") as? MenuScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                scene.settings =  Settings(maxBubbles:10, playTime: 20 )
+                scene.settings =  Settings(maxBubbles:15, playTime: 1 )
                 scene.playerName = self.playerName
                 // Present the scene
                 view.presentScene(scene)
