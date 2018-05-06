@@ -16,6 +16,15 @@ class MenuScene: SKScene {
     var startGame: SVLSpriteNodeButton2!
     var viewController: GameViewController!
     weak var menuDelegate: MenuSceneDelegate?
+    var TextInput:UITextField?
+    let slider = UISlider(frame: CGRect(x: 10, y: 250, width: 280, height: 20))
+    let slider2 = UISlider(frame: CGRect(x: 10, y: 150, width: 280, height: 20))
+    
+    override func didMove(to view: SKView) {
+        loadSlider()
+        loadTextInput()
+
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -33,17 +42,16 @@ class MenuScene: SKScene {
                     gameSceneTemp?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
                 }
-              
-
             }
         }
     }
     
-    let slider = UISlider(frame: CGRect(x: 10, y: 250, width: 280, height: 20))
-    let slider2 = UISlider(frame: CGRect(x: 10, y: 150, width: 280, height: 20))
-    
-    override func didMove(to view: SKView) {
-        loadSlider()
+    private func loadTextInput() {
+        let textFieldFrame = CGRect(origin: .zero, size: CGSize(width: 200, height: 30))
+        let textField = UITextField()
+        textField.frame = textFieldFrame
+        textField.backgroundColor = UIColor.white
+        textField.placeholder = "hello world"
     }
     
     private func loadSlider() {
