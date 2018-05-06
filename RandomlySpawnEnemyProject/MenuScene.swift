@@ -21,7 +21,8 @@ class MenuScene: SKScene {
     let slider2 = UISlider(frame: CGRect(x: 10, y: 150, width: 280, height: 20))
     let labelSlider = UILabel (frame: CGRect (x: 10, y: 230, width: 280, height: 20))
     let labelSlider2 = UILabel (frame: CGRect (x: 10, y: 130, width: 280, height: 20))
-    let textField = UITextField(frame: CGRect(x: 10, y: 400, width: 280, height: 20))
+    let textField = UITextField(frame: CGRect(x: 10, y: 400, width: 280, height: 50))
+    
     var playerName: String?
     var settings: Settings?
     
@@ -53,7 +54,10 @@ class MenuScene: SKScene {
                     self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
                    
                     slider.removeFromSuperview()
+                    labelSlider.removeFromSuperview()
                     slider2.removeFromSuperview()
+                    labelSlider2.removeFromSuperview()
+                    textField.removeFromSuperview()
                 }
             }
         }
@@ -80,21 +84,24 @@ class MenuScene: SKScene {
         view?.addSubview(labelSlider2)
     }
     
-    @objc func slider1ValueDidChange(_ sender:UISlider!)
-    {
-        labelSlider.text = String(sender.value)
-        print("\(sender.value)")
-    }
+  
     
     @objc func slider2ValueDidChange(_ sender:UISlider!)
     {
-        var v = round(sender.value*60)
-        if v < 10 {
-            v = 10
+        var time = round(sender.value*60)
+        if time < 10 {
+            time = 10
         }
-        labelSlider2.text = String(v)
+        labelSlider2.text = String(time)
         print("\(sender.value)")
     }
     
+    @objc func slider1ValueDidChange(_ sender:UISlider!)
+    {
+        let number = round(sender.value*15)
+      
+        labelSlider.text = String(number)
+        print("\(sender.value)")
+    }
     
 }
