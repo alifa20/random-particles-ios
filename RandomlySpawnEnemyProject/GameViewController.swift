@@ -61,7 +61,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "MenuScene") as? MenuScene {
+            if let scene = SKScene(fileNamed: "FinishScene") as? MenuScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 scene.settings =  Settings(maxBubbles:10, playTime: 20 )

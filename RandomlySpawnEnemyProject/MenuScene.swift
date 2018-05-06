@@ -27,10 +27,11 @@ class MenuScene: SKScene {
         loadSlider()
         loadTextInput()
         
-        print("hey \(TimeInterval((self.settings?.playTime)!))")
         
     }
     
+    
+   
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for t in touches {
