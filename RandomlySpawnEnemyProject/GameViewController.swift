@@ -18,14 +18,14 @@ import GameplayKit
 
 struct Settings {
     let maxBubbles: Int
-    //    let playTime: TimeInterval
-    //    init(maxBubbles: Int, playTime: TimeInterval) {
-    //        self.maxBubbles = maxBubbles
-    //        self.playTime = playTime
-    //    }
-    init(maxBubbles: Int) {
+    let playTime: TimeInterval
+    init(maxBubbles: Int, playTime: TimeInterval) {
         self.maxBubbles = maxBubbles
+        self.playTime = playTime
     }
+    //    init(maxBubbles: Int) {
+    //        self.maxBubbles = maxBubbles
+    //    }
 }
 
 class GameViewController: UIViewController, MenuSceneDelegate {
@@ -48,6 +48,8 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     
     var countdownTimer: Timer!
     var totalTime = 60
+    var TimeInterval = 20
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
             if let scene = SKScene(fileNamed: "MenuScene") as? MenuScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                scene.settings =  Settings(maxBubbles:10 )
+                scene.settings =  Settings(maxBubbles:10, playTime: 20 )
                 scene.playerName = self.playerName
                 // Present the scene
                 view.presentScene(scene)

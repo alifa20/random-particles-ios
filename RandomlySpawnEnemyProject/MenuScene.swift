@@ -27,7 +27,7 @@ class MenuScene: SKScene {
         loadSlider()
         loadTextInput()
         
-        print("hey \(String(describing: self.settings?.maxBubbles))")
+        print("hey \(TimeInterval((self.settings?.playTime)!))")
         
     }
     
