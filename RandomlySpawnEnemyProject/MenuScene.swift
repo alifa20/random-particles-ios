@@ -19,11 +19,16 @@ class MenuScene: SKScene {
     var TextInput:UITextField?
     let slider = UISlider(frame: CGRect(x: 10, y: 250, width: 280, height: 20))
     let slider2 = UISlider(frame: CGRect(x: 10, y: 150, width: 280, height: 20))
+    let textField = UITextField(frame: CGRect(x: 10, y: 400, width: 280, height: 20))
+    var playerName: String?
+    var settings: Settings?
     
     override func didMove(to view: SKView) {
         loadSlider()
         loadTextInput()
-
+        
+        print("hey \(String(describing: self.settings?.maxBubbles))")
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -36,7 +41,6 @@ class MenuScene: SKScene {
             {
                 if name == "startGame"
                 {
-                    print("Touched")
                     let transition:SKTransition = SKTransition.fade(withDuration: 1)
                     let gameSceneTemp =  GameScene(fileNamed: "GameScene")
                     gameSceneTemp?.scaleMode = .aspectFill
@@ -49,19 +53,19 @@ class MenuScene: SKScene {
     }
     
     private func loadTextInput() {
-        let textFieldFrame = CGRect(origin: .zero, size: CGSize(width: 200, height: 30))
-        let textField = UITextField()
-        textField.frame = textFieldFrame
+//        let textFieldFrame = CGRect(origin: .zero, size: CGSize(width: 200, height: 30))
+//        textField.frame = textFieldFrame
         textField.backgroundColor = UIColor.white
         textField.placeholder = "hello world"
+        view?.addSubview(textField)
     }
     
     private func loadSlider() {
-//        slider.addTarget(self, action:  "sliderValueDidChange", for: .valueChanged)
+        //        slider.addTarget(self, action:  "sliderValueDidChange", for: .valueChanged)
         
         slider.addTarget(self, action: #selector(MenuScene.slider1ValueDidChange(_:)), for: .valueChanged)
         
-//        slider2.addTarget(self, action: "sliderValueDidChange", for: .valueChanged)
+        //        slider2.addTarget(self, action: "sliderValueDidChange", for: .valueChanged)
         slider2.addTarget(self, action: #selector(MenuScene.slider2ValueDidChange(_:)), for: .valueChanged)
         view?.addSubview(slider)
         view?.addSubview(slider2)
