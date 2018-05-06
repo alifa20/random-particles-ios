@@ -17,6 +17,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     var rightArrowButton: SVLSpriteNodeButton!
     var shootButton: SVLSpriteNodeButton!
     var scoreLabel: SKLabelNode!
+    var timerLbl: SKLabelNode!
     
     var ship: SKSpriteNode!
     
@@ -30,6 +31,12 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     
     var lastColor = ""
     var score: Double = 0
+    
+    var countdownTimer: Timer!
+    var totalTime:Double = 4
+    var TimeInterval = 1
+    
+    let timerLabel = UILabel (frame: CGRect (x: 10, y: 130, width: 280, height: 20))
     
     //MARK: - Scene Stuff
     override func didMove(to view: SKView) {
@@ -46,8 +53,60 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
         asteroidSpawner(delay: 0.5)
         
         scoreLabel = childNode(withName: "scoreLabel") as! SKLabelNode
-        scoreLabel.text="98"
+        scoreLabel.text="0"
         
+        timerLbl = childNode(withName: "timerLbl") as! SKLabelNode
+        timerLbl.text=""
+        //        print("\(settings?.playTime)")
+         print("p \(settings?.playTime)")
+        totalTime = (settings?.playTime)!
+        maxNumberOfBubbles = (settings?.maxBubbles)!
+//        print("\(totalTime)  maxNumberOfBubbles \(maxNumberOfBubbles)")
+       
+        startTimer()
+        //        view.addSubview(timerLabel)
+        
+    }
+    
+    
+    @objc func updateTime() {
+        //        timerLabel.text = "\(timeFormatted(totalTime))"
+        timerLbl.text = "\(timeFormatted(Int(totalTime)))"
+        
+        if totalTime != 0 {
+            totalTime -= 1
+        } else {
+            endTimer()
+        }
+    }
+    
+    func startTimer() {
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        //        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        //        timer.fire()
+    }
+    
+    func endTimer() {
+        countdownTimer.invalidate()
+        let transition:SKTransition = SKTransition.fade(withDuration: 1)
+        let sceneTemp =  FinishScene(fileNamed: "FinishScene") as FinishScene?
+        sceneTemp?.scaleMode = .aspectFill
+        sceneTemp?.playerName = self.playerName
+        sceneTemp?.score = self.score
+        sceneTemp?.settings = self.settings
+        self.scene?.view?.presentScene(sceneTemp!, transition: transition)
+        
+        
+        //        timerLabel.removeFromSuperview()
+        timerLbl.removeFromParent()
+        
+    }
+    
+    func timeFormatted(_ totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        //     let hours: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d", minutes, seconds)
     }
     
     func asteroidSpawner(delay: TimeInterval){
@@ -237,6 +296,9 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
         }
         lastColor = button.bubbleType
         score += point;
+        //        scoreLabel = self.parent?.childNode(withName: "scoreLabel") as! SKLabelNode
+        scoreLabel.text = String(score)
+        
         print("\(score)")
     }
     

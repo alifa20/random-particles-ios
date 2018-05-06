@@ -26,8 +26,8 @@ class TouchableSKSpriteNode: SKSpriteNode {
     weak var delegate: GameSceneDelegate?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        scoreLabel = self.parent?.childNode(withName: "scoreLabel") as! SKLabelNode
-        scoreLabel.text = String(Int(scoreLabel.text!)!+1)
+//        scoreLabel = self.parent?.childNode(withName: "scoreLabel") as! SKLabelNode
+//        scoreLabel.text = String(Int(scoreLabel.text!)!+1)
         //        gameDelegate?.calledFromBubble(self)
         delegate?.calledFromBubble(self)
         self.removeFromParent()

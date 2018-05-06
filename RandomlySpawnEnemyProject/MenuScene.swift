@@ -23,18 +23,17 @@ class MenuScene: SKScene {
     let labelSlider2 = UILabel (frame: CGRect (x: 10, y: 130, width: 280, height: 20))
     let textField = UITextField(frame: CGRect(x: 10, y: 400, width: 280, height: 50))
     
-    var playerName: String?
+    var playerName: String? = "Player1"
     var settings: Settings?
     
     override func didMove(to view: SKView) {
         loadSlider()
         loadTextInput()
-        
-        
+        print("didMove menu \(settings?.playTime)")
     }
     
     
-   
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for t in touches {
@@ -48,11 +47,21 @@ class MenuScene: SKScene {
                     let transition:SKTransition = SKTransition.fade(withDuration: 1)
                     let gameSceneTemp =  GameScene(fileNamed: "GameScene") as GameScene?
                     gameSceneTemp?.scaleMode = .aspectFill
-                    gameSceneTemp?.settings =  Settings(maxBubbles:Int(slider2.value), playTime: TimeInterval(slider.value))
-
-                    gameSceneTemp?.playerName = self.playerName
+//                    print("settings.playTime \(settings?.playTime)")
+                    gameSceneTemp?.settings = settings
+                    //                    gameSceneTemp?.settings =  Settings(maxBubbles:Int(slider2.value), playTime: Double(slider.value)
+                    
+                    //TimeInterval(slider.value)
+                    //                    )
+                    
+//                    if textField.text {
+//                        gameSceneTemp?.playerName = textField.text
+//                    }
+                    gameSceneTemp?.playerName = playerName
+                    
+                    print("self.playerName \(String(describing: self.playerName))")
                     self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
-                   
+                    
                     slider.removeFromSuperview()
                     labelSlider.removeFromSuperview()
                     slider2.removeFromSuperview()
@@ -64,27 +73,33 @@ class MenuScene: SKScene {
     }
     
     private func loadTextInput() {
-//        let textFieldFrame = CGRect(origin: .zero, size: CGSize(width: 200, height: 30))
-//        textField.frame = textFieldFrame
+        //        let textFieldFrame = CGRect(origin: .zero, size: CGSize(width: 200, height: 30))
+        //        textField.frame = textFieldFrame
         textField.backgroundColor = UIColor.white
         textField.placeholder = "Player1"
+        textField.addTarget(self, action: #selector(MenuScene.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         view?.addSubview(textField)
+    }
+    
+    @objc private func textFieldDidChange(_ sender:UITextField!){
+        playerName = sender.text
     }
     
     private func loadSlider() {
         //        slider.addTarget(self, action:  "sliderValueDidChange", for: .valueChanged)
         
         slider.addTarget(self, action: #selector(MenuScene.slider1ValueDidChange(_:)), for: .valueChanged)
-        
+        slider.value = 1
         //        slider2.addTarget(self, action: "sliderValueDidChange", for: .valueChanged)
         slider2.addTarget(self, action: #selector(MenuScene.slider2ValueDidChange(_:)), for: .valueChanged)
+        slider2.value = 1
         view?.addSubview(slider)
         view?.addSubview(labelSlider)
         view?.addSubview(slider2)
         view?.addSubview(labelSlider2)
     }
     
-  
+    
     
     @objc func slider2ValueDidChange(_ sender:UISlider!)
     {
@@ -92,16 +107,18 @@ class MenuScene: SKScene {
         if time < 10 {
             time = 10
         }
+        settings?.playTime = Double(time)
         labelSlider2.text = String(time)
-        print("\(sender.value)")
     }
     
     @objc func slider1ValueDidChange(_ sender:UISlider!)
     {
-        let number = round(sender.value*15)
-      
+        var number = round(sender.value*15)
+        if number < 1 {
+            number = 1
+        }
         labelSlider.text = String(number)
-        print("\(sender.value)")
+        settings?.maxBubbles = Int(number)
     }
     
 }

@@ -42,7 +42,7 @@ class GameRoomTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section)"
+        return "Top Scores"
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.row)!")
@@ -52,19 +52,52 @@ class GameRoomTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
 class FinishScene: SKScene {
     var records: [ScoreRecord] = []
     var gameTableView = GameRoomTableView()
+    var settings: Settings?
+    var playerName: String? = "Player 1"
+    var playAgainButton: SKLabelNode!
+    var score: Double = 20
     
     override func didMove(to view: SKView) {
         let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
         print(documentsDir)
-        let r = ScoreRecord(playerName: "jafar",score: 10.0)
-        records = [r]
+        let r = ScoreRecord(playerName: self.playerName!, score: self.score)
         //        saveData(records: records)
         gameTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         gameTableView.frame = CGRect(x:20,y:50,width:280,height:200)
         //                gameTableView.items = self.records
         self.scene?.view?.addSubview(gameTableView)
         //        gameTableView.reloadData()
+      
         loadData()
+        
+        
+        self.records.append(r)
+//        let r2 = ScoreRecord(playerName: "test", score: 12.0)
+//        self.records.append(r2)
+        self.gameTableView.items = records.sorted(by: {(n1:ScoreRecord, n2:ScoreRecord) -> Bool in return n2.score < n1.score})
+        self.gameTableView.reloadData()
+        saveData(records: self.records)
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches {
+            let positionInScene = t.location(in: self)
+            let touchedNode = self.atPoint(positionInScene)
+            
+            if let name = touchedNode.name
+            {
+                if name == "playAgainButton"
+                {
+                    let transition:SKTransition = SKTransition.fade(withDuration: 1)
+                    let sceneTemp =  MenuScene(fileNamed: "MenuScene") as MenuScene?
+                    sceneTemp?.scaleMode = .aspectFill
+                    sceneTemp?.settings =  Settings(maxBubbles:15, playTime: 60 )
+                    gameTableView.removeFromSuperview()
+                    self.scene?.view?.presentScene(sceneTemp!, transition: transition)
+                }
+            }
+        }
     }
     
     func saveData(records: [ScoreRecord]) {
@@ -88,7 +121,6 @@ class FinishScene: SKScene {
             self.records = decodedHighScores
             print(records)
             self.gameTableView.items = self.records
-            self.gameTableView.items = [ScoreRecord(playerName: "jafar",score: 10.0)]
             self.gameTableView.reloadData()
             //            self.tableView.reloadData()
         }

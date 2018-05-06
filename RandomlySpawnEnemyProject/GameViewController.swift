@@ -17,9 +17,9 @@ import GameplayKit
 
 
 struct Settings {
-    let maxBubbles: Int
-    let playTime: TimeInterval
-    init(maxBubbles: Int, playTime: TimeInterval) {
+    var maxBubbles: Int
+    var playTime: Double
+    init(maxBubbles: Int, playTime: Double) {
         self.maxBubbles = maxBubbles
         self.playTime = playTime
     }
@@ -51,9 +51,9 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     var TimeInterval = 1
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        timerLabel.text = "time"
         
         //        let menuScene = MenuScene()
         //        menuScene.scaleMode = .aspectFill
@@ -61,18 +61,18 @@ class GameViewController: UIViewController, MenuSceneDelegate {
         
         if let view = self.view as! SKView? {
             //             Load the SKScene from 'GameScene.sks'
-            //            if let scene = SKScene(fileNamed: "FinishScene") {
-            //                // Set the scale mode to scale to fit the window
-            //                scene.scaleMode = .aspectFill
-            //                // Present the scene
-            //                view.presentScene(scene)
-            //                return
-            //            }
+//            if let scene = SKScene(fileNamed: "FinishScene") {
+//                // Set the scale mode to scale to fit the window
+//                scene.scaleMode = .aspectFill
+//                // Present the scene
+//                view.presentScene(scene)
+//                return
+//            }
             
             if let scene = SKScene(fileNamed: "MenuScene") as? MenuScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                scene.settings =  Settings(maxBubbles:15, playTime: 1 )
+                scene.settings =  Settings(maxBubbles:15, playTime: 60 )
                 scene.playerName = self.playerName
                 // Present the scene
                 view.presentScene(scene)
@@ -82,7 +82,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
             
             view.showsFPS = true
             view.showsNodeCount = true
-            startTimer()
+            //            startTimer()
         }
     }
     
