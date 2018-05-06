@@ -18,7 +18,8 @@ struct ScoreRecord: Codable {
 }
 
 class GameRoomTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
-    var items: [String] = ["Player1", "Player2", "Player3"]
+//    var items: [String] = ["Player1", "Player2", "Player3"]
+    var items: [ScoreRecord] = [ScoreRecord(playerName: "jafar",score: 10.0)]
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         self.delegate = self
@@ -36,7 +37,7 @@ class GameRoomTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
-        cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.text = "\(self.items[indexPath.row].score) - \(self.items[indexPath.row].playerName)"
         return cell
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
