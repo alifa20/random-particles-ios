@@ -41,6 +41,8 @@ class MenuScene: SKScene {
                     let gameSceneTemp =  GameScene(fileNamed: "GameScene")
                     gameSceneTemp?.scaleMode = .aspectFill
                     self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
+                    slider.removeFromSuperview()
+                    slider2.removeFromSuperview()
                 }
             }
         }
