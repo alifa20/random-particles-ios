@@ -28,10 +28,13 @@ class MenuScene: SKScene {
                 if name == "startGame"
                 {
                     print("Touched")
+                    let transition:SKTransition = SKTransition.fade(withDuration: 1)
                     let gameSceneTemp =  GameScene(fileNamed: "GameScene")
                     gameSceneTemp?.scaleMode = .aspectFill
-                    self.scene?.view?.presentScene(gameSceneTemp)
+                    self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
                 }
+              
+
             }
         }
     }
