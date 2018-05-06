@@ -18,8 +18,9 @@ struct ScoreRecord: Codable {
 }
 
 class GameRoomTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
-//    var items: [String] = ["Player1", "Player2", "Player3"]
-    var items: [ScoreRecord] = [ScoreRecord(playerName: "jafar",score: 10.0)]
+    //    var items: [String] = ["Player1", "Player2", "Player3"]
+    //    var items: [ScoreRecord] = [ScoreRecord(playerName: "jafar",score: 10.0)]
+    var items: [ScoreRecord] = []
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         self.delegate = self
@@ -59,9 +60,11 @@ class FinishScene: SKScene {
         records = [r]
         //        saveData(records: records)
         gameTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        gameTableView.frame=CGRect(x:20,y:50,width:280,height:200)
+        gameTableView.frame = CGRect(x:20,y:50,width:280,height:200)
+        //                gameTableView.items = self.records
         self.scene?.view?.addSubview(gameTableView)
-        gameTableView.reloadData()
+        //        gameTableView.reloadData()
+        loadData()
     }
     
     func saveData(records: [ScoreRecord]) {
@@ -83,6 +86,10 @@ class FinishScene: SKScene {
         if let highScoresData = try? Data(contentsOf: archiveURL),
             let decodedHighScores = try? jsonDecoder.decode([ScoreRecord].self, from: highScoresData) {
             self.records = decodedHighScores
+            print(records)
+            self.gameTableView.items = self.records
+            self.gameTableView.items = [ScoreRecord(playerName: "jafar",score: 10.0)]
+            self.gameTableView.reloadData()
             //            self.tableView.reloadData()
         }
     }
