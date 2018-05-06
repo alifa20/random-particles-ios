@@ -10,11 +10,30 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+//struct Settings {
+////    let playTime: TimeInterval
+//    let maxBubbles: Int
+//}
+
+
+struct Settings {
+    let maxBubbles: Int
+    //    let playTime: TimeInterval
+    //    init(maxBubbles: Int, playTime: TimeInterval) {
+    //        self.maxBubbles = maxBubbles
+    //        self.playTime = playTime
+    //    }
+    init(maxBubbles: Int) {
+        self.maxBubbles = maxBubbles
+    }
+}
+
 class GameViewController: UIViewController, MenuSceneDelegate {
     func calledFromMenuScene(_ scene: MenuScene) {
         print("calledFromMenuScene")
     }
-    
+    var playerName: String?
+    var settings: Settings?
     var startGame: SVLSpriteNodeButton2!
     
     //    func calledFromMenuScene(_ button: SVLSpriteNodeButton2) {
@@ -34,15 +53,17 @@ class GameViewController: UIViewController, MenuSceneDelegate {
         super.viewDidLoad()
         timerLabel.text = "time"
         
-//        let menuScene = MenuScene()
-//        menuScene.scaleMode = .aspectFill
-//        menuScene.menuDelegate = self
-    
+        //        let menuScene = MenuScene()
+        //        menuScene.scaleMode = .aspectFill
+        //        menuScene.menuDelegate = self
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "MenuScene") {
+            if let scene = SKScene(fileNamed: "MenuScene") as? MenuScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
+                scene.settings =  Settings(maxBubbles:10 )
+                scene.playerName = self.playerName
                 // Present the scene
                 view.presentScene(scene)
             }
@@ -110,6 +131,15 @@ class GameViewController: UIViewController, MenuSceneDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scene = segue.destination as? GameViewController {
+            scene.playerName = "..."
+            //            let s =  Settings(maxBubbles:10 )
+            //            scene.settings = s
+            //            scene.playerName = self.playerName
+            //            scene.settings = self.settings
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
