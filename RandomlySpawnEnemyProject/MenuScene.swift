@@ -42,8 +42,10 @@ class MenuScene: SKScene {
                 if name == "startGame"
                 {
                     let transition:SKTransition = SKTransition.fade(withDuration: 1)
-                    let gameSceneTemp =  GameScene(fileNamed: "GameScene")
+                    let gameSceneTemp =  GameScene(fileNamed: "GameScene") as GameScene?
                     gameSceneTemp?.scaleMode = .aspectFill
+                    gameSceneTemp?.settings =  self.settings
+                    gameSceneTemp?.playerName = self.playerName
                     self.scene?.view?.presentScene(gameSceneTemp!, transition: transition)
                     slider.removeFromSuperview()
                     slider2.removeFromSuperview()
@@ -56,7 +58,7 @@ class MenuScene: SKScene {
 //        let textFieldFrame = CGRect(origin: .zero, size: CGSize(width: 200, height: 30))
 //        textField.frame = textFieldFrame
         textField.backgroundColor = UIColor.white
-        textField.placeholder = "hello world"
+        textField.placeholder = "Player1"
         view?.addSubview(textField)
     }
     

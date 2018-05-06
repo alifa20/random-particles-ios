@@ -11,7 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     
- 
+    var playerName: String?
+    var settings: Settings?
     var leftArrowButton: SVLSpriteNodeButton!
     var rightArrowButton: SVLSpriteNodeButton!
     var shootButton: SVLSpriteNodeButton!
@@ -32,6 +33,7 @@ class GameScene: SKScene, SVLSpriteNodeButtonDelegate, GameSceneDelegate {
     
     //MARK: - Scene Stuff
     override func didMove(to view: SKView) {
+        print("ooooo \(String(describing: self.settings?.maxBubbles))")
         leftArrowButton = childNode(withName: "leftArrowButton") as! SVLSpriteNodeButton
         
         rightArrowButton = childNode(withName: "rightArrowButton") as! SVLSpriteNodeButton
