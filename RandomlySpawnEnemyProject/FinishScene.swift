@@ -21,9 +21,9 @@ class FinishScene: SKScene {
     override func didMove(to view: SKView) {
         let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
         print(documentsDir)
-//        let r = ScoreRecord(playerName: "jafar",score: 10.0)
-//        let records = [r]
-//        saveData(records: records)
+        let r = ScoreRecord(playerName: "jafar",score: 10.0)
+        let records = [r]
+        saveData(records: records)
     }
   
     func saveData(records: [ScoreRecord]) {
